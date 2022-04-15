@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: root-app
+  namespace: argocd
+spec:
+  destination:
+    name: ''
+    namespace: 'argocd'
+    server: 'https://kubernetes.default.svc'
+  source:
+    path: 'k8s/'
+    repoURL: 'https://github.com/mjasion/istio-503-uc'
+    targetRevision: HEAD
+    directory:
+      recurse: true
+  project: default
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=orphan
