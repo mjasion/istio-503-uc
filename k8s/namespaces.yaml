@@ -6,6 +6,6 @@ metadata:
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: app
+  name: default
   labels:
     istio-injection: enabled

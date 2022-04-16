@@ -1,9 +1,15 @@
 #!/bin/bash
+
+echo "Bootstraping Kind"
+kind create cluster --config kind-cluster.yaml
 echo "Bootstraping ArgoCD"
-kubectl create namespace argocd > /dev/null 2>&1
-kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.3.3/manifests/install.yaml > /dev/null
-kubectl rollout status -n argocd deployment/argocd-server > /dev/null
-kubectl apply -f https://raw.githubusercontent.com/mjasion/istio-503-uc/main/k8s/rootapp.yaml
+kubectl --context=kind-kind create namespace argocd > /dev/null 2>&1 
+kubectl --context=kind-kind apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/v2.3.3/manifests/install.yaml > /dev/null
+kubectl --context=kind-kind rollout status -n argocd deployment/argocd-server > /dev/null
+kubectl --context=kind-kind rollout status -n argocd deployment/argocd-repo-server > /dev/null
+kubectl --context=kind-kind rollout status -n argocd deployment/argocd-redis > /dev/null
+kubectl --context=kind-kind rollout status -n argocd deployment/argocd-applicationset-controller > /dev/null
+kubectl --context=kind-kind apply -f https://raw.githubusercontent.com/mjasion/istio-503-uc/main/k8s/argoapp.yaml
 echo "Done."
 echo 
 echo "ArgoCD credentials: "
