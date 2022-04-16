@@ -10,8 +10,8 @@ spec:
     server: 'https://kubernetes.default.svc'
   source:
     path: 'k8s/'
-    repoURL: 'https://github.com/mjasion/istio-503-uc'
-    targetRevision: HEAD
+    repoURL: 'https://github.com/mjasion/istio-503-uc.git'
+    targetRevision: main
     directory:
       recurse: true
   project: default
