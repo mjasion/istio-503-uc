@@ -9,4 +9,3 @@ metadata:
   name: app
   labels:
     istio-injection: enabled
----

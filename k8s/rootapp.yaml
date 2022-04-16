@@ -4,17 +4,17 @@ metadata:
   name: root-app
   namespace: argocd
 spec:
-  destination:
-    name: ''
-    namespace: 'argocd'
-    server: 'https://kubernetes.default.svc'
+  project: default
   source:
     path: 'k8s/'
     repoURL: 'https://github.com/mjasion/istio-503-uc.git'
     targetRevision: main
     directory:
       recurse: true
-  project: default
+  destination:
+    name: ''
+    namespace: 'argocd'
+    server: 'https://kubernetes.default.svc'
   syncPolicy:
     automated:
       prune: true
