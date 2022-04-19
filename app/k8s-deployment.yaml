@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: http-chunked
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: http-chunked
+  template:
+    metadata:
+      labels:
+        app: http-chunked
+    spec:
+      containers:
+      - name: http-chunked
+        image: http-chunked
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /health
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-chunked
+spec:
+  type: ClusterIP
+  selector:
+    app: http-chunked
+  ports:
+  - port: 8080
+    targetPort: 8080
