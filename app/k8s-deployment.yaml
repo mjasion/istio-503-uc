@@ -14,7 +14,8 @@ spec:
     spec:
       containers:
       - name: http-chunked
-        image: http-chunked
+        image: ghcr.io/mjasion/istio-503-uc:main
+        imagePullPolicy: Always
         livenessProbe:
           httpGet:
             port: 8080
