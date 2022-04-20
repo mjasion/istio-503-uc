@@ -32,3 +32,39 @@ spec:
   ports:
   - port: 8080
     targetPort: 8080
+---
+apiVersion: networking.istio.io/v1beta1
+kind: Gateway
+metadata:
+  name: http-chunked
+  namespace: istio-system
+spec:
+  selector:
+    app: istio-ingressgateway
+  servers:
+  - hosts:
+    - "*"
+    port:
+      number: 80
+      name: http
+      protocol: HTTP
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: http-chunked
+  namespace: default
+spec:
+  hosts:
+  - "*"
+  gateways:
+  - http-chunked.istio-system
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        port:
+          number: 8080
+        host: http-chunked.default.svc.cluster.local

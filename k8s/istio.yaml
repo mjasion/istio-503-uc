@@ -61,7 +61,20 @@ spec:
       releaseName: istio-ingressgateway
       values: |
         service:
-          type: ClusterIP
+          type: NodePort
+          ports:
+          - name: status-port
+            port: 15021
+            protocol: TCP
+            targetPort: 15021
+          - name: http2
+            port: 30080
+            protocol: TCP
+            targetPort: 80
+          - name: https
+            port: 30443
+            protocol: TCP
+            targetPort: 443
         autoscaling:
           maxReplicas: 2
   destination:
