@@ -1,4 +1,4 @@
-FROM golang:buster as build
+FROM golang:alpine as build
 
 WORKDIR /app
 
@@ -7,9 +7,9 @@ COPY *.mod ./
 
 RUN go build -o /app/http-chunked
 
-FROM gcr.io/distroless/base-debian10
+FROM alpine
 WORKDIR /
 EXPOSE 8080
 COPY --from=build /app/http-chunked /http-chunked
-USER nonroot:nonroot
+USER 1000:1000
 ENTRYPOINT ["/http-chunked"]
