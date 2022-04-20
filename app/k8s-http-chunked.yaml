@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: http-chunked
+spec:
+  serviceName: http-chunked
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: http-chunked
+  template:
+    metadata:
+      labels:
+        app: http-chunked
+        sidecar.istio.io/inject: "true"
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: http-chunked
+        image: ghcr.io/mjasion/istio-503-uc:main
+        livenessProbe:
+          httpGet:
+            port: 8080
+            path: /health
+  volumeClaimTemplates:
+  - metadata:
+      name: empty
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: http-chunked
+spec:
+  type: ClusterIP
+  selector:
+    app: http-chunked
+  ports:
+  - port: 8080
+    targetPort: 8080

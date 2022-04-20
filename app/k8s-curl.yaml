@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: curl
+spec:
+  serviceName: curl
+  replicas: 1  
+  selector:
+    matchLabels:
+      app: alpine-curl
+  template:
+    metadata:
+      labels:
+        app: alpine-curl
+        sidecar.istio.io/inject: "false"
+    spec:
+      terminationGracePeriodSeconds: 1
+      containers:
+      - name: curl
+        image: alpine/curl
+        command:
+          - /bin/sh
+          - -c
+          - "sleep 3600"
+  volumeClaimTemplates:
+  - metadata:
+      name: empty
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Mi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: curl
+spec:
+  selector:
+    app: alpine-curl
+  ports:
+  - port: 80

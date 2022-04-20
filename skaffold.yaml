@@ -5,10 +5,10 @@ metadata:
 build:
   artifacts:
   - context: app
-    image: istio-503-uc
+    image: ghcr.io/mjasion/istio-503-uc
     docker:
       dockerfile: app/Dockerfile
 deploy:
   kubectl:
     manifests:
-    - app/k8s-deployment.yaml
+    - app/k8s-*.yaml
