@@ -30,7 +30,7 @@ func HandlePostWrong(w http.ResponseWriter, r *http.Request) {
             fmt.Println("Tick at", t)
         }
     }()
-    time.Sleep(time.Millisecond * 11000)
+    time.Sleep(time.Millisecond * 5100)
     ticker.Stop()
     fmt.Println("Finished: should return Content-Length: 0 here")
     w.Header().Set("Content-Length", "0")
@@ -58,6 +58,6 @@ func HandlePostCorrect(w http.ResponseWriter, r *http.Request) {
         }
 		fmt.Println("Closed")
     }()
-    time.Sleep(time.Millisecond * 11000)
+    time.Sleep(time.Millisecond * 5100)
 	ticker.Stop()
 }

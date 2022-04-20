@@ -58,7 +58,7 @@ spec:
   hosts:
   - "*"
   gateways:
-  - http-chunked.istio-system
+  - istio-system/http-chunked
   http:
   - match:
     - uri:
@@ -68,3 +68,13 @@ spec:
         port:
           number: 8080
         host: http-chunked.default.svc.cluster.local
+---
+apiVersion: telemetry.istio.io/v1alpha1
+kind: Telemetry
+metadata:
+  name: mesh-default
+  namespace: istio-system
+spec:
+  accessLogging:
+    - providers:
+      - name: envoy
