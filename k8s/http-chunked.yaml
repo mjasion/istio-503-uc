@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: http-chunked
+  namespace: argocd
+spec:
+  project: default
+  source:
+    path: 'app/'
+    repoURL: 'https://github.com/mjasion/istio-503-uc.git'
+    targetRevision: main
+    directory:
+      recurse: true
+  destination:
+    name: ''
+    namespace: 'default'
+    server: 'https://kubernetes.default.svc'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: false
+    syncOptions:
+      - CreateNamespace=true
+      - PrunePropagationPolicy=orphan
