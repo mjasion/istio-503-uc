@@ -20,7 +20,7 @@ func HandleHealth(w http.ResponseWriter, r *http.Request) {
 }
 func HandlePostWrong(w http.ResponseWriter, r *http.Request) {
     w.Header().Set("Connection", "Keep-Alive")
-    w.Header().Set("Transfer-Encoding", "chunked")
+    w.Header().Set("Transfer-Encoding", "Chunked")
     w.Header().Set("X-Content-Type-Options", "nosniff")
 
     ticker := time.NewTicker(time.Second)
@@ -30,7 +30,7 @@ func HandlePostWrong(w http.ResponseWriter, r *http.Request) {
             fmt.Println("Tick at", t)
         }
     }()
-    time.Sleep(time.Second * 5)
+    time.Sleep(time.Millisecond * 11000)
     ticker.Stop()
     fmt.Println("Finished: should return Content-Length: 0 here")
     w.Header().Set("Content-Length", "0")
@@ -58,6 +58,6 @@ func HandlePostCorrect(w http.ResponseWriter, r *http.Request) {
         }
 		fmt.Println("Closed")
     }()
-    time.Sleep(time.Millisecond * 5100)
+    time.Sleep(time.Millisecond * 11000)
 	ticker.Stop()
 }
