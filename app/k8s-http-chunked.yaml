@@ -17,7 +17,7 @@ spec:
       terminationGracePeriodSeconds: 1
       containers:
       - name: http-chunked
-        image: ghcr.io/mjasion/istio-503-uc:main
+        image: ghcr.io/mjasion/istio-upstream-reset:main
         livenessProbe:
           httpGet:
             port: 8080

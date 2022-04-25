@@ -5,7 +5,7 @@ metadata:
 build:
   artifacts:
   - context: app
-    image: ghcr.io/mjasion/istio-503-uc
+    image: ghcr.io/mjasion/istio-upstream-reset
     docker:
       dockerfile: app/Dockerfile
 deploy:

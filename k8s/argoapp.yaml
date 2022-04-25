@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     path: 'k8s/'
-    repoURL: 'https://github.com/mjasion/istio-503-uc.git'
+    repoURL: 'https://github.com/mjasion/istio-upstream-reset.git'
     targetRevision: main
     directory:
       recurse: true

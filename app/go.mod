@@ -1,3 +1,3 @@
-module github.com/mjasion/istio-503-uc
+module github.com/mjasion/istio-upstream-reset
 
 go 1.16
